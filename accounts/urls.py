@@ -10,7 +10,7 @@ from .views import (
     RegisterView,
 )
 
-app_name = "accounts"
+app_name = "account"
 
 urlpatterns = [
     path("login", LoginView.as_view(), name="Login"),
@@ -18,7 +18,7 @@ urlpatterns = [
     path("register", RegisterView.as_view(), name="Register"),
     path("", AccountsListView.as_view(), name="Accounts"),
     path("new", AccountCreateView.as_view(), name="NewAccount"),
-    path("<str:username>/details", AccountDetailView.as_view(), name="AccountDetails"),
-    path("<str:username>/update", AccountUpdateView.as_view(), name="AccountUpdate"),
-    path("<str:username>/delete", AccountDeleteView.as_view(), name="DeleteAccount"),
+    path("<str:pk>/details", AccountDetailView.as_view(), name="AccountDetails"),
+    path("<str:pk>/update", AccountUpdateView.as_view(), name="AccountUpdate"),
+    path("<str:pk>/delete", AccountDeleteView.as_view(), name="DeleteAccount"),
 ]

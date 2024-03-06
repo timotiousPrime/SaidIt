@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Crispy Forms
+    "crispy_forms",
+    "crispy_bootstrap4",
     # My Apps
     "main",
     "accounts",
@@ -54,6 +57,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "SaidIt.urls"
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 TEMPLATES = [
     {

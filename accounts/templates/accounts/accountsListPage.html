@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="container-lg  mb-4">
+    <ul class="col list-group ">
+        <div class=" row  my-4 ">
+            <a class=" w-25 mx-auto btn btn-lg btn-primary text-decoration-none" href="{% url 'account:NewAccount' %}" style="min-width: 18rem;"> New Account</a>
+        </div>
+        {% for usr in user_list %}
+            <div class="mx-auto text-decoration-none card text-dark bg-light mb-3" style="width: 18rem;">
+                <div class="card">
+                    <div class="d-flex flex-row justify-content-between card-header">
+                        <div class="">{{ usr.user_profile|title }}</div>
+                        <div class="">
+                            <div style="font-size: 0.75em;">
+                                User ID:{{ usr.pk }}
+                            </div>
+                            <div style="font-size: 0.75em;">
+                                Profile ID:{{ usr.user_profile.pk }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{% if usr.user_profile.title %}{{ usr.user_profile.title }} {% endif %}{{ usr.user_profile.first_name|title }} {{ usr.user_profile.surname|title }}</h5>
+                        <p class="card-text">Posts: {{ usr.posts.all|length }}</p>
+                        <div class="btn-group">
+                            <a href="{% url 'account:AccountDetails'  pk=usr.pk  %}" class="btn btn-info">View</a>
+                            <a href="{% url 'account:DeleteAccount' pk=usr.pk  %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

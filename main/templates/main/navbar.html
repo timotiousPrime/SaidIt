@@ -1,0 +1,41 @@
+<header class="navbar navbar-expand-md navbar-dark bd-navbar bg-dark">
+    <nav class="container-xxl flex-wrap flex-md-nowrap" aria-label="Main navigation">
+      <a class="navbar-brand p-0 me-2" href="/" aria-label="Bootstrap">
+        SaidIt
+      </a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        menu
+      </button>
+  
+      <div class="collapse navbar-collapse" id="bdNavbar">
+        <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
+          <li class="nav-item col-6 col-md-auto">
+            <a class="nav-link p-2" aria-current="page href="/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Home</a>
+          </li>
+        </ul>
+  
+        <hr class="d-md-none text-white-50">
+  
+        <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+          <li class="nav-item col-6 col-md-auto">
+            <a class="nav-link p-2" href="{% url 'account:AccountDetails' pk=user.pk %}" rel="noopener">
+              {{ user|title }}
+            </a>
+          </li>
+          <li class="nav-item col-6 col-md-auto">
+            <a class="nav-link p-2" href="{% url 'account:Accounts' %}" >
+              Accounts
+            </a>
+          </li>
+          <li class="nav-item col-6 col-md-auto">
+            <a class="nav-link p-2" href="#" >
+              Logout
+            </a>
+          </li>
+        </ul>
+  
+        <a class="btn btn-bd-download d-lg-inline-block my-2 my-md-0 ms-md-3" href="#">Download</a>
+      </div>
+    </nav>
+  </header>
