@@ -1,9 +1,10 @@
+from . import views
 from django.urls import path
 from .views import (
     LoginView,
     LogoutView,
     AccountsListView,
-    AccountCreateView,
+    # AccountCreateView,
     AccountDetailView,
     AccountUpdateView,
     AccountDeleteView,
@@ -17,7 +18,8 @@ urlpatterns = [
     path("logout", LogoutView.as_view(), name="Logout"),
     path("register", RegisterView.as_view(), name="Register"),
     path("", AccountsListView.as_view(), name="Accounts"),
-    path("new", AccountCreateView.as_view(), name="NewAccount"),
+    # path("new", AccountCreateView.as_view(), name="NewAccount"),
+    path("new1", views.accountCreateView, name="newAccount1"),
     path("<str:pk>/details", AccountDetailView.as_view(), name="AccountDetails"),
     path("<str:pk>/update", AccountUpdateView.as_view(), name="AccountUpdate"),
     path("<str:pk>/delete", AccountDeleteView.as_view(), name="DeleteAccount"),

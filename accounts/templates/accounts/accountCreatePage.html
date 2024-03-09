@@ -10,7 +10,7 @@
 
 
     <h2>Create New Account</h2>
-    <form method="post" id="NewAccountForm" action="{% url 'account:NewAccount' %}" enctype="multipart/form-data">
+    <form method="POST" id="newAccountForm" action="{% url 'account:newAccount1' %}" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="card mb-3">
           <div class="card-header">
@@ -44,7 +44,7 @@
         </div>
     </div>
   </div>
-  <button type="submit" form="NewAccountForm" class="btn btn-primary">Add New User</button>
+  <button type="submit" form="newAccountForm" class="btn btn-primary">Add New User</button>
     </form>
 </section>
 

@@ -34,30 +34,30 @@ class UserAccountForm(UserCreationForm):
 
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=True)
-    surname = forms.CharField(required=True)
-    email = forms.EmailField()
+    # surname = forms.CharField(required=True)
+    # email = forms.EmailField()
 
     class Meta:
         model = User_Profile
         fields = (
-            "title",
+            # "title",
             "first_name",
-            "surname",
-            "date_of_birth",
-            "email",
-            "phone_number",
-            "interests",
+            # "surname",
+            # "date_of_birth",
+            # "email",
+            # "phone_number",
+            # "interests",
         )
-        widgets = {
-            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
-            "interests": forms.SelectMultiple(
-                attrs={
-                    "class": "form-select select2 interests-multiple",
-                    "placeholder": "Select Interests",
-                    "id": "InterestsSelect",
-                }
-            ),
-        }
+        # widgets = {
+        #     "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+        #     "interests": forms.SelectMultiple(
+        #         attrs={
+        #             "class": "form-select select2 interests-multiple",
+        #             "placeholder": "Select Interests",
+        #             "id": "InterestsSelect",
+        #         }
+        #     ),
+        # }
 
     def __ini__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
