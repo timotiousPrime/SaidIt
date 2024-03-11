@@ -1,6 +1,9 @@
+import http
+from sys import prefix
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.forms import formset_factory
 
 # Transaction
 from django.db import transaction
@@ -44,50 +47,42 @@ class AccountsListView(ListView):
 
 def accountCreateView(request):
     template_name = "accounts/accountCreatePage.html"
+    EmploymentHistoryFormSet = formset_factory(EmploymentHistoryForm, extra=1)
+    
     if request.method == "POST":
-        user_form = UserAccountForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-        employment_history_form = EmploymentHistoryForm(request.POST)
-        lst = []
-        if user_form.is_valid():
-            user_data = user_form.cleaned_data
-            # new_username = user_data["username"]
-            print(user_data)
-            user = User.objects.get(username=user_data["username"])
-            lst.append(user_data)
+        user_form = UserAccountForm(request.POST, prefix="user_form")
+        profile_form = UserProfileForm(request.POST, prefix="profile_form")
+        employment_history_formset = EmploymentHistoryForm(request.POST, prefix="employment_history_formset")
+        print(request.POST)
+        
+        if (user_form.is_valid() and profile_form.is_valid()):
+            # Save user
+            user_form.save()
+            print("User saved!")
+            # Create new profile instance, but dont save yet. First need to set the user
+            profile_form.save(commit=False)
+            print("Profile created")
+            # Set the user for the profile
+            profile_form.user.id = user_form.id
+            print("profile updated with user")
+            # save new profile instance
+            profile_form.save()
+            print("profile saved saved!")
+            return HttpResponse("User and profile have been created and saved")
 
-            # new_profile = User_Profile.objects.get(username=new_username)
 
-            # profile_form["user"] =
-        if profile_form.is_valid():
-            profile_data = profile_form.cleaned_data
-            print(profile_data)
 
-            lst.append(profile_data)
+        return HttpResponse(request.POST)
 
-        if employment_history_form.is_valid():
-            emp_hist_data = employment_history_form.cleaned_data
-            print(emp_hist_data)
-
-            lst.append(emp_hist_data)
-
-        return HttpResponse(lst)
-
-        # context = {
-        #     "user_form": user_form,
-        #     "profile_form": profile_form,
-        #     "employment_history_form": employment_history_form,
-        # }
-
-        # return HttpResponse(context)
-
-    user_form = UserAccountForm()
-    profile_form = UserProfileForm()
+    EmploymentHistoryFormSet = formset_factory(EmploymentHistoryForm, extra=1)
+    employment_history_formset = EmploymentHistoryFormSet()
+    user_form = UserAccountForm(prefix="user_form")
+    profile_form = UserProfileForm(prefix="profile_form")
     employment_history_form = EmploymentHistoryForm()
     context = {
         "form": user_form,
         "profile_form": profile_form,
-        "employment_history_form": employment_history_form,
+        "employment_history_formset": employment_history_formset,
     }
 
     return render(request, template_name, context)
@@ -95,7 +90,7 @@ def accountCreateView(request):
 
 class AccountCreateView(CreateView):
     template_name = "accounts/accountCreatePage.html"
-    model = User
+    # model = User
     form_class = UserAccountForm
     success_url = reverse_lazy("account:Accounts")
 

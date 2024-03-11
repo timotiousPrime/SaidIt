@@ -22,6 +22,7 @@ class UserAdmin(BaseUserAdmin):
     inlines = [UserProfileInline, EmploymentHistoryInline]
 
 
+
 # Unregister initial User so we can update the modified User for admin
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -31,5 +32,6 @@ admin.site.register(User, UserAdmin)
 # register the UserProfileAdmin that will display the employment history included
 
 admin.site.register(Interest)
+admin.site.register(User_Profile )
 admin.site.register(Job_Title)
 admin.site.register(Employment_History)

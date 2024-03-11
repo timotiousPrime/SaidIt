@@ -25,25 +25,27 @@
       </div>
       <div class="card mb-3">
         <div class="card-header">
-           Profile Details
+           Profile Details 
         </div>
         <div class="card-body">
                 <div class="row">
-                    {% csrf_token %}
                     {% crispy profile_form %}
                 </div>
       </div>
     </div>
+    {{ formset.management_form }}
+    {% for frm in employment_history_formset %}
     <div class="card mb-3">
       <div class="card-header">
          Employment History
       </div>
       <div class="card-body">
         <div class="row">
-            {% crispy employment_history_form %}
+          {{ frm|crispy }}
         </div>
+      </div>
     </div>
-  </div>
+    {% endfor %}
   <button type="submit" form="newAccountForm" class="btn btn-primary">Add New User</button>
     </form>
 </section>
